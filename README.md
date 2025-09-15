@@ -1,7 +1,8 @@
 # WpfSolarSystem
 
 ## Beskrivelse
-Dette project er lavet af Louise og Allan.\n
+Dette project er lavet af Louise og Allan.
+
 Du kan se hvordan projektet ser ud med threading_timer i branchen Threading_Timer, dette er lavet af Allan.
 
 Du kan se også se hvordan det er lavet med DispatchTimer i branchen DispatchTimer som er lavet af Louise.
