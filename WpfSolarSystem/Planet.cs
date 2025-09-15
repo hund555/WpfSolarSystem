@@ -13,12 +13,15 @@ namespace WpfSolarSystem
     {
         public Ellipse Ellipse { get; set; }
         public string Name { get; set; }
-
+        // Orbit radius from the center of orbit
         private readonly int orbitRadius = 0;
         private double speed = 0;
+
+        // Center of orbit position
         private readonly int xpos = 0;
         private readonly int ypos = 0;
 
+        // Next position of the planet
         private int nextXPos = 0;
         private int nextYPos = 0;
 
@@ -39,6 +42,13 @@ namespace WpfSolarSystem
             this.ypos = ypos;
         }
 
+        /// <summary>
+        /// Updates the planet's next position based on its current orbital parameters.
+        /// This method is used my worker thread to calculate the next position of the planet in its orbit.
+        /// </summary>
+        /// <remarks>This method calculates the next position of the planet in its orbit by incrementing
+        /// the orbital angle and applying trigonometric functions to determine the new coordinates. The calculated
+        /// position is stored internally and can be used for rendering or further calculations.</remarks>
         public void CalculateNextPlanetPosition()
         {
             this.angle += this.speed;
@@ -47,6 +57,13 @@ namespace WpfSolarSystem
             this.nextYPos = (int)(Math.Sin(angle) * this.orbitRadius + this.ypos);
         }
 
+        /// <summary>
+        /// Updates the position of the planet on the canvas.
+        /// This method is used by the UI thread to update the graphical representation of the planet
+        /// </summary>
+        /// <remarks>This method sets the new position of the planet's graphical representation  by
+        /// updating the <see cref="Canvas.LeftProperty"/> and <see cref="Canvas.TopProperty"/>  attached properties of
+        /// the associated <see cref="Ellipse"/> object.</remarks>
         public void MovePlanet()
         {
             Ellipse.SetValue(Canvas.LeftProperty, (double)nextXPos);
